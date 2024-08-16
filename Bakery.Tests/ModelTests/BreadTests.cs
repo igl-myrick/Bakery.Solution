@@ -23,6 +23,7 @@ namespace Bakery.Tests
       Assert.AreEqual(price, expectedCost);
     }
 
+    [TestMethod]
     public void CalculatePrice_ReturnsPriceOfOrder_Int()
     {
       int amtToOrder = 7;
