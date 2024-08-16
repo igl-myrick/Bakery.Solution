@@ -22,5 +22,14 @@ namespace Bakery.Tests
       int price = newPastry.Price;
       Assert.AreEqual(price, expectedCost);
     }
+
+    [TestMethod]
+    public void CalculatePrice_ReturnsPriceOfOrder_Int()
+    {
+      int amtToOrder = 17;
+      Pastry newPastry = new Pastry();
+      int expectedPrice = newPastry.CalculatePrice(17);
+      Assert.AreEqual(expectedPrice, 26);
+    }
   }
 }
