@@ -27,7 +27,7 @@ namespace Bakery.Tests
     {
       int amtToOrder = 7;
       Bread newBread = new Bread();
-      expectedPrice = newBread.CalculatePrice(7);
+      int expectedPrice = newBread.CalculatePrice(7);
       Assert.AreEqual(expectedPrice, 25);
     }
   }
