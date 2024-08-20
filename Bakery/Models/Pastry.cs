@@ -8,17 +8,19 @@ namespace Bakery.Models
 
     public int CalculatePrice(int amtToBuy)
     {
-      int outputPrice = 2;
-      for (int index = 0; index < amtToBuy; index++)
+      int outputPrice = 0;
+      for (int index = 0; index <= amtToBuy; index++)
       {
+        Console.WriteLine(index);
         if (index % 4 != 0)
         {
-          outputPrice += 2;
+          outputPrice += Price;
         }
         else
         {
           outputPrice += 0;
         }
+      Console.WriteLine(outputPrice);
       }
       return outputPrice;
     }
