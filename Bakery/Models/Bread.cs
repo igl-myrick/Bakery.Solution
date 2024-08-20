@@ -8,12 +8,12 @@ namespace Bakery.Models
 
     public int CalculatePrice(int amtToBuy)
     {
-      int outputPrice = 5;
-      for (int index = 0; index < amtToBuy; index++)
+      int outputPrice = 0;
+      for (int index = 0; index <= amtToBuy; index++)
       {
         if (index % 3 != 0)
         {
-          outputPrice += 5;
+          outputPrice += Price;
         }
         else
         {
