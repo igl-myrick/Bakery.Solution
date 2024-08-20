@@ -11,7 +11,6 @@ namespace Bakery.Models
       int outputPrice = 0;
       for (int index = 0; index <= amtToBuy; index++)
       {
-        Console.WriteLine(index);
         if (index % 4 != 0)
         {
           outputPrice += Price;
@@ -20,7 +19,6 @@ namespace Bakery.Models
         {
           outputPrice += 0;
         }
-      Console.WriteLine(outputPrice);
       }
       return outputPrice;
     }
