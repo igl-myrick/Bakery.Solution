@@ -13,13 +13,74 @@ namespace Bakery
       Console.WriteLine("Bread: $5");
       Console.WriteLine("Pastries: $2");
       Console.WriteLine("----------------------------");
-      HandleOrder();
-      Console.WriteLine("----------------------------");
+      SetupOrder();
+    }
+
+    static void SetupOrder()
+    {
+      Console.WriteLine("What would you like to order?");
+      string userItem = Console.ReadLine();
+      if (userItem == "bread")
+      {
+        HandleBreadOrder();
+      }
+      else if (userItem == "pastries" || userItem == "pastry")
+      {
+        HandlePastryOrder();
+      }
+      else
+      {
+        Console.WriteLine("Invalid input, please re-enter your selection:");
+        SetupOrder();
+      }
+    }
+
+    static void HandleBreadOrder()
+    {
+      Bread newBread = new Bread();
+      Console.WriteLine("How many loaves of bread would you like to order?");
+      Console.WriteLine("Every third loaf is free!");
+      string userAmt = Console.ReadLine();
+      int parsedAmt = ParseInput(userAmt);
+      if (parsedAmt == 0)
+      {
+        Console.WriteLine("Please enter a valid number.");
+        HandleBreadOrder();
+      }
+      else
+      {
+        int total = newBread.CalculatePrice(parsedAmt);
+        ConfirmOrder(total);
+      }
+    }
+
+    static void HandlePastryOrder()
+    {
+      Pastry newPastry = new Pastry();
+      Console.WriteLine("How many pastries would you like to order?");
+      Console.WriteLine("Every fourth pastry is free!");
+      string userAmt = Console.ReadLine();
+      int parsedAmt = ParseInput(userAmt);
+      if (parsedAmt == 0)
+      {
+        Console.WriteLine("Please enter a valid number.");
+        HandlePastryOrder();
+      }
+      else
+      {
+        int total = newPastry.CalculatePrice(parsedAmt);
+        ConfirmOrder(total);
+      }
+    }
+
+    static void ConfirmOrder(int userPrice)
+    {
+      Console.WriteLine($"Your total: {userPrice}");
       Console.WriteLine("Would you like to place a new order? Write 'yes' or 'no'.");
       string userReply = Console.ReadLine();
       if (userReply.ToLower() == "yes")
       {
-        HandleOrder();
+        SetupOrder();
       }
       else
       {
@@ -27,50 +88,17 @@ namespace Bakery
       }
     }
 
-    static void HandleOrder()
+    static int ParseInput(string input)
     {
-      Console.WriteLine("What would you like to order?");
-      string userItem = Console.ReadLine().ToLower();
-      if (userItem == "pastry" || userItem == "pastries")
-      {
-        Console.WriteLine("How many pastries would you like to order?");
-        Console.WriteLine("Every fourth pastry is free!");
-        int userAmt = PlaceOrder("pastry");
-        Console.WriteLine($"Your price is: ${userAmt}");
-      }
-      else if (userItem == "bread")
-      {
-        Console.WriteLine("How many loaves of bread would you like to order?");
-        Console.WriteLine("Every third loaf is free!");
-        int userAmt = PlaceOrder("bread");
-        Console.WriteLine($"Your price is: ${userAmt}");
-      }
-      else
-      {
-        Console.WriteLine("Incorrect input, please re-enter your selection:");
-        HandleOrder();
-      }
-    }
-
-    static int PlaceOrder(string whatToOrder)
-    {
-      string userAmt = Console.ReadLine();
-      int parsedAmt = 0;
-      bool result = Int32.TryParse(userAmt, out parsedAmt);
+      int parsedInput = 0;
+      bool result = Int32.TryParse(input, out parsedInput);
       if (result == false)
       {
-        Console.WriteLine("Please enter a valid number.");
-        PlaceOrder(whatToOrder);
-      }
-      if (whatToOrder == "bread")
-      {
-        Bread newBread = new Bread();
-        return newBread.CalculatePrice(parsedAmt);
+        return 0;
       }
       else
       {
-        Pastry newPastry = new Pastry();
-        return newPastry.CalculatePrice(parsedAmt);
+        return parsedInput;
       }
     }
   }
