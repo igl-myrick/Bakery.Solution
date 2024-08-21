@@ -91,7 +91,7 @@ namespace Bakery
     static int ParseInput(string input)
     {
       int parsedInput = 0;
-      bool result = Int32.TryParse(input, out parsedInput);
+      bool result = int.TryParse(input, out parsedInput);
       if (result == false)
       {
         return 0;
